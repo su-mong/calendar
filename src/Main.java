@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -74,6 +71,21 @@ public class Main {
             createT = "CREATE TABLE IF NOT EXISTS rsvps (id SERIAL PRIMARY KEY,event_id SERIAL,CONSTRAINT fk_rsvps_event_id FOREIGN KEY(event_id) REFERENCES events(id),rsvp_sender_id SERIAL,CONSTRAINT fk_rsvps_sender_id FOREIGN KEY(rsvp_sender_id) REFERENCES users(id),rsvp_receiver_id SERIAL,CONSTRAINT fk_rsvps_receiver_id FOREIGN KEY(rsvp_receiver_id) REFERENCES users(id),  received_at TIMESTAMP WITH TIME ZONE NOT NULL,is_participated BOOLEAN DEFAULT FALSE,description TEXT);";
             smt = connection.createStatement();
             smt.executeUpdate(createT);
+
+            createT = "SELECT user_id FROM users WHERE user_id = 'dbms_practice';";
+            smt = connection.createStatement();
+            ResultSet resultSet = smt.executeQuery(createT);
+            boolean testUserExist = false;
+            while(resultSet.next()) {
+                testUserExist = true;
+            }
+
+            if(testUserExist == false) {
+                createT = "INSERT INTO users (name, user_id, password, email, notification_channel) " +
+                        "VALUES('dbms_practice', 'dbms_practice', 'dbms_practice', 'dbms_practice@hanyang.ac.kr', 'pop_up_message_box');";
+                smt = connection.createStatement();
+                smt.executeUpdate(createT);
+            }
 
             connection.close();
 
