@@ -133,7 +133,6 @@ public class EventBookingPanel extends JPanel {
 
         JButton cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> {
-            win.calendarPanel.fillCalendar(win.currentUserId);
             win.change("calendar");
         });
         panel.add(cancelButton, BorderLayout.SOUTH);
@@ -151,6 +150,7 @@ public class EventBookingPanel extends JPanel {
             );
 
             if(result) {
+                win.calendarPanel.fillCalendar(win.currentUserId);
                 win.change("calendar");
             } else {
                 JOptionPane.showMessageDialog(

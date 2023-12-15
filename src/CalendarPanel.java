@@ -54,17 +54,33 @@ public class CalendarPanel extends JPanel implements MouseListener {
         add(monthButton);
         add(nextButton);
 
+        JButton reminderButton = new JButton("show reminders");
+        reminderButton.setBounds(0, 35, 480, 35);
+        reminderButton.addActionListener(e -> {
+            win.eventReminderPanel = new EventReminderPanel(win);
+            win.change("eventReminder");
+        });
+        add(reminderButton);
+
+        JButton rsvpsButton = new JButton("show rsvps");
+        rsvpsButton.setBounds(520, 35, 480, 35);
+        rsvpsButton.addActionListener(e -> {
+            win.rsvpPanel = new RsvpPanel(win);
+            win.change("rsvp");
+        });
+        add(rsvpsButton);
+
         for (int i = 0; i < 11; i += 2) {
             calendarTable.setRowHeight(i, 20); // Date rows.
         }
         for (int i = 1; i < 12; i += 2) {
-            calendarTable.setRowHeight(i, 82); // Event rows.
+            calendarTable.setRowHeight(i, 58); // Event rows.
         }
 
         calendarTable.addMouseListener(this);
 
         JScrollPane calendarScrollPane = new JScrollPane(calendarTable);
-        calendarScrollPane.setBounds(0, 35, 1000, 565);
+        calendarScrollPane.setBounds(0, 70, 1000, 530);
         add(calendarScrollPane);
         fillCalendar(win.currentUserId);
         setVisible(true);

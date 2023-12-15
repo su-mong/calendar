@@ -30,6 +30,7 @@ class LoginPanel extends JPanel {
             if(currentUser.id != -1) {
                 win.currentUserId = currentUser.id;
                 win.currentUserModel = currentUser;
+                win.loadReminders();
                 win.change("calendar");
             } else {
                 JOptionPane.showMessageDialog(
@@ -71,17 +72,17 @@ class LoginPanel extends JPanel {
             return user;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(
-                    getParent(),
-                    "Error : " + e.getMessage(),
-                    "Login Error",
-                    JOptionPane.ERROR_MESSAGE
+                getParent(),
+                "Error : " + e.getMessage(),
+                "Login Error",
+                JOptionPane.ERROR_MESSAGE
             );
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
-                    getParent(),
-                    "Error : " + e.getMessage(),
-                    "Login Error",
-                    JOptionPane.ERROR_MESSAGE
+                getParent(),
+                "Error : " + e.getMessage(),
+                "Login Error",
+                JOptionPane.ERROR_MESSAGE
             );
             e.printStackTrace();
         }
